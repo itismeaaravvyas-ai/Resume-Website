@@ -1,0 +1,168 @@
+/* Colour variables: dark neutrals plus ONE blue accent. --edge keeps content centred with 24px minimum side space */
+:root {
+  --bg: #0F1420;
+  --text: #F2F4F8;
+  --text-2: #B4BCCD;
+  --line: #2A3350;
+  --accent: #6EA8FF;
+  --accent-light: #9CC3FF;
+  --on-accent: #0F1420;
+  --paper-text: #1E2430;
+  --paper-line: #D5DAE3;
+  --edge: max(24px, calc((100% - 1000px) / 2));
+}
+
+/* Print page size (the print rules are at the bottom) */
+@page { size: A4; margin: 12mm; }
+
+/* Base elements: page, headings, paragraphs, links */
+html { scroll-padding-top: 80px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+h1, h2, h3, h4 {
+  font-family: "Space Grotesk", Arial, sans-serif;
+  color: var(--text);
+  line-height: 1.2;
+}
+h1 { font-size: clamp(2.25rem, 6vw, 3.5rem); margin: 0 0 24px; }
+h2 { font-size: 1.75rem; margin: 0 0 24px; }
+h3 { font-size: 1.15rem; margin: 0 0 8px; }
+p { max-width: 68ch; margin: 0 0 24px; }
+a { color: var(--accent); }
+a:hover { color: var(--accent-light); }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* Sections: shared spacing, 56px above each section */
+section { padding: 56px var(--edge) 0; }
+#contact { padding-bottom: 56px; }
+
+/* Navigation bar: sticky flexbox row */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px var(--edge);
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-right: auto;
+  font-family: "Space Grotesk", Arial, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 8px;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav-link:hover { color: var(--accent); }
+
+/* Buttons: filled (.button) and outlined (.button-outline), hover changes colour only */
+.button, .button-outline {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 24px;
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.button { background: var(--accent); color: var(--on-accent); }
+.button:hover { background: var(--accent-light); border-color: var(--accent-light); color: var(--on-accent); }
+.button-outline { background: transparent; color: var(--accent); }
+.button-outline:hover { background: var(--accent-light); border-color: var(--accent-light); color: var(--on-accent); }
+.nav .button { padding: 0 16px; }
+.actions { display: flex; flex-wrap: wrap; gap: 16px; }
+
+/* Hero: name, description, what I want, two buttons */
+#hero { padding-top: 64px; }
+.lead { font-size: 1.25rem; }
+.looking { color: var(--text-2); }
+
+/* Experience cards: flat grid, thin full outline, no shadow */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 24px;
+}
+.card p { margin: 0 0 8px; font-size: 0.95rem; }
+.card p:last-child { margin-bottom: 0; }
+.card .meta { color: var(--text-2); }
+
+/* Education and skills: plain lists grouped by spacing */
+.plain { list-style: none; margin: 0; padding: 0; }
+.plain li { max-width: 68ch; margin-bottom: 24px; }
+.plain li:last-child { margin-bottom: 0; }
+.skills li { margin-bottom: 8px; }
+
+/* Paper resume: the one white area, so it looks like a real page on the dark background */
+#resume { margin-top: 56px; padding-bottom: 56px; }
+.download { margin-bottom: 24px; }
+.sheet {
+  max-width: 794px;
+  margin: 0 auto;
+  padding: 40px;
+  background: #FFFFFF;
+  color: var(--paper-text);
+  border: 1px solid var(--paper-line);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.sheet h3 { font-size: 1.6rem; margin: 0 0 8px; color: var(--paper-text); }
+.sheet h4 { font-size: 1rem; margin: 24px 0 8px; padding-bottom: 4px; color: var(--paper-text); border-bottom: 1px solid var(--paper-line); }
+.sheet p { max-width: none; margin: 0 0 8px; }
+.sheet ul { list-style: none; margin: 0; padding: 0; }
+.sheet li { margin-bottom: 8px; }
+.sheet a { color: var(--paper-text); text-decoration: underline; }
+.sheet a:hover { color: #000000; }
+
+/* Phones: one column, 16px edges, full-width buttons */
+@media (max-width: 699px) {
+  :root { --edge: 16px; }
+  html { scroll-padding-top: 140px; }
+  .cards { grid-template-columns: 1fr; }
+  .actions a { width: 100%; justify-content: center; }
+  .sheet { padding: 24px 16px; }
+}
+
+/* Print: show only the paper resume, black on white, one A4 page */
+@media print {
+  header, main > section:not(#resume), #resume > h2, .download { display: none; }
+  body { background: #FFFFFF; }
+  #resume { margin: 0; padding: 0; background: #FFFFFF; }
+  .sheet { max-width: none; padding: 0; border: 0; font-size: 9pt; line-height: 1.3; color: #000000; }
+  .sheet h3, .sheet h4, .sheet a { color: #000000; }
+  .sheet h3 { font-size: 18pt; }
+  .sheet h4 { font-size: 10pt; margin: 10px 0 4px; border-color: #000000; }
+  .sheet p { margin-bottom: 4px; }
+  .sheet li { margin-bottom: 3px; }
+}
